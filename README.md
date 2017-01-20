@@ -2,7 +2,7 @@ Star Battle Solver by Mike MacHenry
 ---
 
 This is a solver for the Star Battle puzzle that I originally wrote for
-Mystery Hunt 2017.
+MIT Mystery Hunt 2017.
 
 I noticed that a traditional backtracking solver took far too long (more than a
 day) too solve a 10x10 Star Battle. I decided to rewrite it using constraint
@@ -14,8 +14,6 @@ TODO
 
 * Create documentation and a test suite.
 
-* Move the region detection into the runFD to increase performance.
-
 * Consider parallelizing solution generation. A good strategy for this might
   be to provide an argument to generate that constrians the most significant
   digit in the puzzle generation to be a particular number. It could then be
@@ -23,6 +21,7 @@ TODO
 
 * Parameterize the board size.
 
-* Create a file reader that reads regions from a file in an easy-to-write
-  format. Check that it's a valid board.
+* Check for input validity of the board
 
+* Allow for parameterization of how many stars must be in each region. Some
+  variations require 1 per region and have more regions.
