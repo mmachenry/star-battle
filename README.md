@@ -1,4 +1,4 @@
-Star Battle Solver by Mike Machenry
+Star Battle Solver by Mike MacHenry
 ---
 
 This is a solver for the Star Battle puzzle that I originally wrote for
