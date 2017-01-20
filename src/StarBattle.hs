@@ -1,7 +1,6 @@
 module StarBattle where
 
 import FD (FDExpr, FD, runFD, news, labelling, (#==), (#<), (#\=))
-import Control.Applicative ((<|>))
 import Control.Monad (filterM, zipWithM, mplus)
 import qualified Data.Set as Set
 import qualified Data.Matrix as M
@@ -45,12 +44,9 @@ regionReject regions solution = loop solution (V.replicate 10 0)
         loop ((x,y):posns) counts =
           let regionId = M.unsafeGet (y+1) (x+1) regions
               current = counts V.! regionId
-          in if current < 2
-             then loop posns (counts V.// [(regionId, current + 1)])
-             else False
+          in current < 2 && loop posns (counts V.// [(regionId, current + 1)])
 -- -}
-
- {- 
+{- 
 regionReject :: [Set.Set (Int,Int)] -> [(Int,Int)] -> Bool
 regionReject regions ns = all (region (Set.fromList ns)) regions
 
