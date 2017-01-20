@@ -22,16 +22,9 @@ regions = map Set.fromList [
    (4,9),(5,9),(6,9)] -- light sea
   ]
 
-starBattle = filter regionReject $ map pairUp generate
+starBattle = filter regionReject generate
 
-pairUp :: [Int] -> [(Int, Int)]
-pairUp ns =
-  let a = take 10 ns
-      b = drop 10 ns
-      pa = zip [0..9] a
-      pb = zip [0..9] b
-  in pa ++ pb
-
+generate :: [[(Int, Int)]]
 generate = runFD $ do
   vars1 <- news 10 (0,9)
   vars2 <- news 10 (0,9)
@@ -39,7 +32,9 @@ generate = runFD $ do
   columns vars
   notAdjacent vars
   rows (vars1++vars2)
-  labelling (vars1++vars2)
+  v1 <- labelling vars1
+  v2 <- labelling vars2
+  return $ zip [0..] v1 ++ zip [0..] v2
 
 columns = mapM (\(a,b)->a + 1 #< b)
 
