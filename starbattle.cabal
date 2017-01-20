@@ -18,6 +18,7 @@ library
   exposed-modules:     StarBattle
                        , ParseMatrix
   build-depends:       base >= 4.7 && < 5
+                     , bytestring
                      , containers
                      , cassava
                      , fd
