@@ -1,32 +1,32 @@
 module StarBattle where
 
-import FD (FDExpr, FD, runFD, news, labelling, (#==), (#<), (#\=))
+import FD (FDExpr, FD, runFD, news, labelling, fromInt, (#==), (#<), (#\=))
 import Control.Monad (filterM, zipWithM, mplus)
 import qualified Data.Set as Set
 import qualified Data.Matrix as M
 import qualified Data.Vector as V
 
-starBattle regions = filter (regionReject regions) generate
+starBattle regions = filter (regionReject regions) (generate (M.nrows regions))
 
-generate :: [[(Int, Int)]]
-generate = runFD $ do
-  vars1 <- news 10 (0,9)
-  vars2 <- news 10 (0,9)
+generate :: Int -> [[(Int, Int)]]
+generate size = runFD $ do
+  vars1 <- news size (0,size-1)
+  vars2 <- news size (0,size-1)
   let vars = zip vars1 vars2
   columns vars
   notAdjacent vars
-  rows (vars1++vars2)
+  rows size (vars1++vars2)
   v1 <- labelling vars1
   v2 <- labelling vars2
   return $ zip [0..] v1 ++ zip [0..] v2
 
 columns = mapM (\(a,b)->a + 1 #< b)
 
-rows vars = mapM (tally vars 2) [0..9]
+rows size vars = mapM (tally vars 2) [0 .. size-1]
   where tally [] count _ = count #== 0
         tally (x:xs) count n =
-          mplus (x #== n >> tally xs (count-1) n)
-                (x #\= n >> tally xs count n)
+          mplus (x #== fromInt n >> tally xs (count-1) n)
+                (x #\= fromInt n >> tally xs count n)
 
 notAdjacent [] = return ()
 notAdjacent [_] = return ()
@@ -39,7 +39,7 @@ notAdjacent ((a1,a2):rest@((b1,b2):_)) = do
 
 -- {-
 regionReject :: M.Matrix Int -> [(Int,Int)] -> Bool
-regionReject regions solution = loop solution (V.replicate 10 0)
+regionReject regions solution = loop solution (V.replicate (M.nrows regions) 0)
   where loop [] counts = True --V.all (==2) counts
         loop ((x,y):posns) counts =
           let regionId = M.unsafeGet (y+1) (x+1) regions
