@@ -12,16 +12,16 @@ about a minute and thirty seconds.
 TODO
 ---
 
-* Create documentation and a test suite.
+* Create documentation
 
 * Consider parallelizing solution generation. A good strategy for this might
   be to provide an argument to generate that constrians the most significant
   digit in the puzzle generation to be a particular number. It could then be
   run in parallel with each possible argument.
 
-* Parameterize the board size.
-
 * Check for input validity of the board
 
 * Allow for parameterization of how many stars must be in each region. Some
   variations require 1 per region and have more regions.
+
+* Accept as many rule adjustments as possible on the commandline

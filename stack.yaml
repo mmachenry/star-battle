@@ -38,9 +38,9 @@ resolver: lts-7.16
 packages:
 - '.'
 - location:
-   git: https://github.com/dmoverton/finite-domain
-   commit: 65373e30aa3f72031bd41d19ebf9684bfa1e01f0
-
+    git: https://github.com/dmoverton/finite-domain
+    commit: 65373e30aa3f72031bd41d19ebf9684bfa1e01f0
+  extra-dep: true
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps: []
