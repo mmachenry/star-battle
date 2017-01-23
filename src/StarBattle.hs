@@ -28,7 +28,7 @@ generate size = runFD $ do
   vars1 <- news size (0,size-1)
   vars2 <- news size (0,size-1)
   columns vars1 vars2
-  notAdjacent (zip vars1 vars2)
+  notAdjacent vars1 vars2
   rows size (vars1++vars2)
   v1 <- labelling vars1
   v2 <- labelling vars2
@@ -68,14 +68,15 @@ rows size vars = mapM_ (tally vars starsPerRow) [0 .. size-1]
 
 -- Loop through all pairs and ensure that no two elements from one column are
 -- adjacent to any of the other two in the next column, and so forth.
-notAdjacent [] = return ()
-notAdjacent [_] = return ()
-notAdjacent ((a1,a2):rest@((b1,b2):_)) = do
+notAdjacent :: [FDExpr] -> [FDExpr] -> FD ()
+notAdjacent [] [] = return ()
+notAdjacent [_] [_] = return ()
+notAdjacent (a1:l1@(b1:_)) (a2:l2@(b2:_)) = do
   1 #< abs(a1-b1)
   1 #< abs(a1-b2)
   1 #< abs(a2-b1)
   1 #< abs(a2-b2)
-  notAdjacent rest
+  notAdjacent l1 l2
 
 -- True if the given solution set of positions meets the region requirement
 -- on the given region. To do this efficiently, I setup an accumulator vector
