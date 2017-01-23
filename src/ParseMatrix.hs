@@ -5,6 +5,8 @@ import qualified Data.Vector as V
 import qualified Data.ByteString.Lazy as BL
 import Data.Csv (decode, HasHeader(NoHeader))
 
+-- | Read a Matrix from a comma-separated value format. Values are expected
+-- as a bytestring with no header.
 parseMatrix :: Read a => BL.ByteString -> M.Matrix a
 parseMatrix input =
   case decode NoHeader input of
