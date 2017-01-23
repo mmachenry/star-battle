@@ -12,6 +12,10 @@ about a minute and thirty seconds.
 TODO
 ---
 
+* Improve performance of rows constraint by somehow not building up a large
+  tree of possible outcomes. A potential algorithm to solve this is mentioned
+  in the comments.
+  
 * Consider parallelizing solution generation. A good strategy for this might
   be to provide an argument to generate that constrians the most significant
   digit in the puzzle generation to be a particular number. It could then be
