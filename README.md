@@ -5,7 +5,7 @@ This is a solver for the Star Battle puzzle that I originally wrote for
 MIT Mystery Hunt 2017.
 
 I noticed that a traditional backtracking solver took far too long (more than a
-day) too solve a 10x10 Star Battle. I decided to rewrite it using constraint
+day) to solve a 10x10 Star Battle. I decided to rewrite it using constraint
 logic programming on finite domains, or CLP(FD). It now solves the 10x10 in
 about a minute and thirty seconds.
 
