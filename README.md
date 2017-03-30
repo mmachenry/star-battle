@@ -1,5 +1,5 @@
 Star Battle Solver by Mike MacHenry
----
+----
 
 This is a solver for the Star Battle puzzle that I originally wrote for
 MIT Mystery Hunt 2017.
@@ -10,7 +10,7 @@ logic programming on finite domains, or CLP(FD). It now solves the 10x10 in
 about a minute and thirty seconds.
 
 TODO
----
+----
 
 * Improve performance of rows constraint by somehow not building up a large
   tree of possible outcomes. A potential algorithm to solve this is mentioned
@@ -27,3 +27,11 @@ TODO
   variations require 1 per region and have more regions.
 
 * Accept as many rule adjustments as possible on the commandline
+
+Notes
+----
+
+To get performance information, you can build with profiling enabled.
+
+    stack build --executable-profiling --library-profiling --ghc-options="-fprof-auto -rtsopts"
+    stack exec -- star-battle examples/changing_rooms.csv +RTS -p -RTS
